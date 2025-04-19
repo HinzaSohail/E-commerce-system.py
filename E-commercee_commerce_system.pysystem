@@ -1,0 +1,35 @@
+Backend Setup (Flask Example)
+
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+PRODUCTS = [
+    {"id": 1, "name": "T-Shirt", "price": 19.99},
+    {"id": 2, "name": "Jeans", "price": 49.99},
+    {"id": 3, "name": "Shoes", "price": 89.99},
+]
+
+@app.route('/products')
+def get_products():
+    return jsonify(PRODUCTS)
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    return jsonify({"message": f"Logged in as {data['name']}"})
+
+@app.route('/order', methods=['POST'])
+def order():
+    return jsonify({"message": "Order placed successfully!"})
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+Run the backend:
+
+pip install flask flask-cors
+python e_commerce_system.py
+
